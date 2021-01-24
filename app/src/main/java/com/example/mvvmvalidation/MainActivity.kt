@@ -1,5 +1,6 @@
 package com.example.mvvmvalidation
 
+import android.content.ContentValues
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
@@ -13,7 +14,7 @@ import com.example.mvvmvalidation.viewmodel.LoginViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity() : AppCompatActivity(), LoginResultCallBacks {
-     var DB: DataBaseHelper? = DataBaseHelper(this@MainActivity)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,13 +23,8 @@ class MainActivity() : AppCompatActivity(), LoginResultCallBacks {
             DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         activityMainBinding.viewModel =
             ViewModelProviders.of(this, LoginViewModelFactory(this)).get(LoginViewModel::class.java)
-        add("as","ad")
     }
 
-    fun add(string: String,string1: String)
-    {
-        DB!!.addData(string,string1)
-    }
 
     override fun onSuccess(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -37,4 +33,5 @@ class MainActivity() : AppCompatActivity(), LoginResultCallBacks {
     override fun onError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
 }

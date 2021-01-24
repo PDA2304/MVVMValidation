@@ -2,6 +2,8 @@ package com.example.mvvmvalidation.viewmodel
 
 import android.app.Activity
 import android.app.Application
+import android.content.ContentValues
+import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,7 +17,7 @@ import com.example.mvvmvalidation.model.DataBaseHelper
 import com.example.mvvmvalidation.model.User
 import com.google.firebase.auth.FirebaseAuth
 
-class LoginViewModel(private val listener: LoginResultCallBacks) : ViewModel() {
+class LoginViewModel(private val listener: LoginResultCallBacks) :ViewModel() {
 
     private val user: User
     private lateinit var auth: FirebaseAuth
@@ -52,7 +54,6 @@ class LoginViewModel(private val listener: LoginResultCallBacks) : ViewModel() {
     public var DB: DataBaseHelper? = null
     fun onLoginClicked(v: View) {
         var main = MainActivity()
-       main.add(user.getPassword(),user.getEmail())
         if (user.isDataValid) {
             auth = FirebaseAuth.getInstance()
             auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
@@ -68,4 +69,7 @@ class LoginViewModel(private val listener: LoginResultCallBacks) : ViewModel() {
         }
     }
 
+
+
 }
+
