@@ -55,10 +55,12 @@ class LoginViewModel(private val listener: LoginResultCallBacks) :ViewModel() {
     fun onLoginClicked(v: View) {
         var main = MainActivity()
         if (user.isDataValid) {
+            DB = DataBaseHelper(v.context)
             auth = FirebaseAuth.getInstance()
             auth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
                 .addOnCompleteListener(main) { task ->
                     if (task.isSuccessful) {
+                        DB!!.addData(user.getPassword(),user.getEmail())
                         listener.onSuccess("Пользователь заргистрирован")
                     } else {
                         listener.onError("ошибка Авторизации")
